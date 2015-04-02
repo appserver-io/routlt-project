@@ -1,6 +1,6 @@
 {
 	"name" : "appserver-io/routlt-project",
-	"description" : "The example application for appserver.io",
+	"description" : "Stub to create a new appserver.io Rout.Lt project",
 	"version" : "0.1.0",
 	"require" : {
 		"appserver-io/routlt" : "~2.0",
@@ -13,9 +13,27 @@
 		"appserver-io/phar" : "~1.0",
 		"appserver-io/build" : "~1.0"
 	},
+	"autoload" : {
+		"psr-0" : {
+			"AppserverIo\\RoutltProject" : "WEB-INF/classes"
+		}
+	},
 	"authors" : [{
 			"name" : "Tim Wagner",
 			"email" : "tw@appserver.io"
 		}
-	]
+	],
+	"support" : {
+		"email" : "tw@appserver.io",
+		"issues" : "https://www.github.com/appserver-io/routlt-project/issues",
+		"source" : "https://www.github.com/appserver-io/routlt-project"
+	},
+	"keywords" : [
+		"Rout.Lt project stub"
+	],
+	"scripts" : {
+		"post-install-cmd" : [
+			"AppserverIo\\RoutltProject\\Meta\\Composer\\Script\\Setup::postInstall"
+		]
+	}
 }

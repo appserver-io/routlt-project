@@ -3,7 +3,7 @@
 
     <pointcut>
         <pointcut-name>allActions</pointcut-name>
-        <pointcut-pattern>call(\Net\Faett\AtChurch\Actions\*->*Action())</pointcut-pattern>
+        <pointcut-pattern>call(${action.namespace}\*->*Action())</pointcut-pattern>
     </pointcut>
 
     <advice>

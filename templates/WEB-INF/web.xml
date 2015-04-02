@@ -2,13 +2,13 @@
 <web-app xmlns="http://www.appserver.io/appserver">
 
     <!--
-     | This section defines informations about your application. 
+     | This section defines informations about your application.
     -->
 
     <display-name>appserver.io Rout.Lt framework project stub</display-name>
     <description>Project Stub for a appserver.io Servlet Engine based application.</description>
 
-    <!-- 
+    <!--
      | This section is all about session configuration and several
      | parameters that influence session storage and lifetime.
      -->
@@ -19,7 +19,7 @@
     </session-config>
 
     <!--
-     | This section defines the servlets configured to handle all requests 
+     | This section defines the servlets configured to handle all requests
      | of your application. The configured servlets has to be mapped to the
      | request URIs in the next section.
     -->
@@ -43,7 +43,7 @@
 
         <init-param>
             <param-name>action.namespace</param-name>
-            <param-value>/Net/Faett/AtChurch/Actions</param-value>
+            <param-value>${routlt.action.namespace}</param-value>
         </init-param>
 
         <!--
