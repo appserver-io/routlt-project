@@ -1,21 +1,18 @@
 {
 	"name" : "appserver-io/routlt-project",
-	"description" : "The example application for appserver.io",
+	"description" : "Stub to create a new appserver.io Rout.Lt project",
 	"version" : "0.1.0",
-	"require" : {
-		"appserver-io/routlt" : "~2.0",
-		"respect/validation" : "~0.8",
-		"components/jquery" : "~1.0",
-		"components/bootstrap" : "~3.0",
-		"components/font-awesome" : "~4.0"
-	},
-	"require-dev" : {
-		"appserver-io/phar" : "~1.0",
-		"appserver-io/build" : "~1.0"
-	},
 	"authors" : [{
 			"name" : "Tim Wagner",
 			"email" : "tw@appserver.io"
 		}
+	],
+	"support" : {
+		"email" : "tw@appserver.io",
+		"issues" : "https://www.github.com/appserver-io/routlt-project/issues",
+		"source" : "https://www.github.com/appserver-io/routlt-project"
+	},
+	"keywords" : [
+		"Rout.Lt project stub generator"
 	]
 }

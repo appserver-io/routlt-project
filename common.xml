@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="appserver-io/routlt-project">
+
+    <!-- initialize ENV variable -->
+    <property environment="env" />
+
+    <!-- initialize the Rout.Lt specific properties -->
+    <property name="appserver.webapps.dir" value="${basedir}/webapps" />
+    <property name="routlt-project.basedir" value="${vendor.dir}/appserver-io/routlt-project" />
+
+    <!-- ==================================================================== -->
+    <!-- Creates a new Rout.Lt project                                        -->
+    <!-- ==================================================================== -->
+    <target name="routlt-create-project" description="Creates a new Rout.Lt project.">
+        <!-- query the user for necessary project data -->
+        <input addproperty="application.name" message="Application Name"/>
+        <input addproperty="installation.dir" defaultvalue="${appserver.webapps.dir}/${application.name}" message="Installation Directory"/>
+        <input addproperty="vendor.name" message="Vendor Name"/>
+        <input addproperty="package.name" message="Package Name"/>
+        <!-- prepare action and Rout.Lt action namespace -->
+        <property name="action.namespace" value="\${vendor.name}\${package.name}\Actions"/>
+        <property name="routlt.action.namespace" value="/${vendor.name}/${package.name}/Actions"/>
+        <!-- copy the framework files -->
+        <copy todir="${installation.dir}">
+            <fileset dir="${routlt-project.basedir}/templates">
+                <include name="**/*"/>
+            </fileset>
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <exec dir="${installation.dir}" executable="composer">
+            <arg line="--no-interaction install"/>
+        </exec>
+    </target>
+
+</project>
