@@ -29,6 +29,9 @@
                 <expandproperties/>
             </filterchain>
         </copy>
+        <exec dir="${installation.dir}" executable="composer">
+            <arg line="--no-interaction install"/>
+        </exec>
     </target>
 
 </project>

@@ -1,0 +1,12 @@
+{
+	"name" : "appserver-io/routlt-project",
+	"description" : "Rout.Lt project stub",
+	"version" : "0.1.0",
+	"require" : {
+		"appserver-io/routlt" : "~2.0",
+		"respect/validation" : "~0.8",
+		"components/jquery" : "~1.0",
+		"components/bootstrap" : "~3.0",
+		"components/font-awesome" : "~4.0"
+	}
+}
