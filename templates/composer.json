@@ -3,7 +3,7 @@
 	"description" : "Rout.Lt project stub",
 	"version" : "0.1.0",
 	"require" : {
-		"appserver-io/routlt" : "~2.0",
+		"appserver-io/routlt" : "~2.0.0-alpha4",
 		"respect/validation" : "~0.8",
 		"components/jquery" : "~1.0",
 		"components/bootstrap" : "~3.0",
