@@ -3,10 +3,13 @@
 
     <!-- initialize ENV variable -->
     <property environment="env" />
-
+    
     <!-- initialize the Rout.Lt specific properties -->
     <property name="appserver.webapps.dir" value="${basedir}/webapps" />
     <property name="routlt-project.basedir" value="${vendor.dir}/appserver-io/routlt-project" />
+
+    <!-- initialize file based properties -->
+    <property file="${routlt-project.basedir}/common.default.properties"/>
 
     <!-- ==================================================================== -->
     <!-- Creates a new Rout.Lt project                                        -->
@@ -17,10 +20,13 @@
         <input addproperty="installation.dir" defaultvalue="${appserver.webapps.dir}/${application.name}" message="Installation Directory"/>
         <input addproperty="vendor.name" message="Vendor Name"/>
         <input addproperty="package.name" message="Package Name"/>
-        <!-- prepare action and Rout.Lt action namespace -->
-        <property name="package.namespace" value="\${vendor.name}\${package.name}"/>
-        <property name="action.namespace" value="\${package.namespace}\Actions"/>
+        <input addproperty="virtual-host.create" defaultvalue="true" validargs="true,false" message="Create a Virtual-Host also"/>
+        <!-- prepare Rout.Lt 2 configuration specific namespaces -->
+        <property name="package.namespace" value="${vendor.name}\${package.name}"/>
         <property name="routlt.action.namespace" value="/${vendor.name}/${package.name}/Actions"/>
+        <!-- prepare Rout.Lt 2 application specific namespaces -->
+        <property name="util.namespace" value="${package.namespace}\Util"/>
+        <property name="action.namespace" value="${package.namespace}\Actions"/>
         <!-- copy the static framework files -->
         <copy todir="${installation.dir}">
             <fileset dir="${routlt-project.basedir}/templates/static">
@@ -45,6 +51,68 @@
         </exec>
         <!-- create the default catch-all index.do file -->
         <touch file="${installation.dir}/index.do"/>
+        <!-- create a virtual-host if requested -->
+        <antcall target="routlt-create-virtual-host-wrapper"/>
+    </target>
+
+    <!-- ==================================================================== -->
+    <!-- Wrapper with condition whether to create a virtual-host or not       -->
+    <!-- ==================================================================== -->
+    <target name="routlt-create-virtual-host-wrapper" if="${virtual-host.create}">
+        <antcall target="routlt-create-virtual-host"/>
+    </target>
+
+    <!-- ==================================================================== -->
+    <!-- Creates a Rout.Lt 2 specific virtual host for appserver.io.          -->
+    <!-- ==================================================================== -->
+    <target name="routlt-create-virtual-host" description="Creates a Rout.Lt 2 specific virtual host for appserver.io.">
+        <!-- query the user for necessary virtual-host data -->
+        <input addproperty="application.name" defaultvalue="myapp" message="Application Name"/>
+        <input addproperty="virtual-host.name" defaultvalue="${application.name}.dev" message="Virtual-Host Name"/>
+        <!-- print a message with the virtual host name/file -->
+        <echo message="Now creating virtual-host: ${virtual-host.name} in ${virtual-host.target.file}" />
+        <!-- load the virtual-host configuration -->
+        <loadfile
+           property="virtual-host.src"
+           srcfile="${virtual-host.source.file}">
+           <filterchain>
+               <expandproperties/>
+            </filterchain>
+        </loadfile>
+        <!-- add/replace the virtual host configuration -->
+        <xmltask source="${virtual-host.target.file}" dest="${virtual-host.target.file}">
+            <!-- try to remove an existing virtual host -->
+            <remove path="/:virtualHosts/:virtualHost[@name='${virtual-host.name}']" />
+            <!-- add the new virtual host for -->
+            <insert
+                position="after"
+                path="/:virtualHosts/:virtualHost[last()]"
+                xml="${virtual-host.src}">
+            </insert>
+        </xmltask>
+        <!-- create the hosts entry if necessary -->
+        <antcall target="routlt-create-hosts-entry"/>
+    </target>
+
+    <!-- ==================================================================== -->
+    <!-- Queries whether the hosts entry in /etc/hosts already exists or not  -->
+    <!-- ==================================================================== -->
+    <target name="routlt-check-host-entry-exists" description="Queries whether the hosts entry in /etc/hosts already exists or not.">
+        <loadfile property="hosts-file-content" srcfile="${hosts.file}"/>
+        <condition property="hosts-entry-exists">
+            <matches pattern="${virtual-host.name}" string="${hosts-file-content}"/>
+        </condition>
+    </target>
+    
+    <!-- ==================================================================== -->
+    <!-- Creates a new entry in the /etc/hosts file                           -->
+    <!-- ==================================================================== -->
+    <target name="routlt-create-hosts-entry" unless="${hosts-entry-exists}" description="Creates a new entry in the /etc/hosts file.">
+        <echo>Now append ${virtual-host.name} ${hosts.file} entry</echo>
+        <echo file="${hosts.file}" append="true"><![CDATA[
+127.0.0.1 ${virtual-host.name}
+::1 ${virtual-host.name}
+fe80::1%lo0 ${virtual-host.name}]]></echo>
     </target>
 
 </project>

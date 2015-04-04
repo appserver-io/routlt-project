@@ -19,13 +19,19 @@
 namespace ${action.namespace};
 
 use AppserverIo\Routlt\DispatchAction;
+use AppserverIo\Routlt\ActionInterface;
+use AppserverIo\Psr\Servlet\Http\HttpServletRequestInterface;
+use AppserverIo\Psr\Servlet\Http\HttpServletResponseInterface;
+use ${util.namespace}\RequestKeys;
 
 /**
- * Default login action implementation.
+ * Default action implementation.
  *
  * @author  Tim Wagner <tw@appserver.io>
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link    https://github.com/appserver-io/routlt-project
+ *
+ * @Path(name="/index")
  *
  * @Results({
  *     @Result(name="input", result="/phtml/index.phtml", type="AppserverIo\Routlt\Results\ServletDispatcherResult")
@@ -41,11 +47,16 @@ class IndexAction extends DispatchAction
      * @param \AppserverIo\Psr\Servlet\Http\HttpServletResponseInterface $servletResponse The response instance
      *
      * @return string|null The action result
+     *
+     * @Action(name="/index")
      */
     public function indexAction(HttpServletRequestInterface $servletRequest, HttpServletResponseInterface $servletResponse)
     {
 
         try {
+            // append the Rout.Lt 2 version to the request attributes
+            $servletRequest->setAttribute(RequestKeys::ROUTLT_VERSION, '${routlt.version}');
+
             // action invocation has been successfull
             return ActionInterface::INPUT;
 

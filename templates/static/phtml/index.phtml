@@ -16,12 +16,14 @@
  * @link    https://github.com/appserver-io/routlt-project
  */
 
+use ${util.namespace}\RequestKeys;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Rout.Lt 2 is up and running.</title>
+    <title>Rout.Lt <?php echo $servletRequest->getAttribute(RequestKeys::ROUTLT_VERSION) ?> is up and running.</title>
     <meta name="description" content="Rout.Lt 2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
@@ -63,7 +65,7 @@
                 <img class="appserver-logo" src="http://cdn.appserver.io/welcome-page/logo_iron-horse_debian_x86_64.png">
                 <h1 class="cover-heading">Congratulations!</h1>
                 <p>
-                    <h4><b>Rout.Lt <i>2</i></b> is up and running...</h4><br/>
+                    <h4><b>Rout.Lt <i><?php echo $servletRequest->getAttribute(RequestKeys::ROUTLT_VERSION) ?></i></b> is up and running...</h4><br/>
                 </p>
                 <div class="row">
                     <div class="col-xs-6">
