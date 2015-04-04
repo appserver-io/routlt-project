@@ -99,15 +99,22 @@
     <!-- ==================================================================== -->
     <target name="routlt-check-host-entry-exists" description="Queries whether the hosts entry in /etc/hosts already exists or not.">
         <loadfile property="hosts-file-content" srcfile="${hosts.file}"/>
-        <condition property="hosts-entry-exists">
-            <matches pattern="${virtual-host.name}" string="${hosts-file-content}"/>
+        <condition property="create-hosts-entry">
+            <and>
+                <isfileselected file="${hosts.file}">
+                    <writable />
+                </isfileselected>
+                <not>
+                    <contains substring="${virtual-host.name}" string="${hosts-file-content}"/>
+                </not>
+            </and>
         </condition>
     </target>
     
     <!-- ==================================================================== -->
     <!-- Creates a new entry in the /etc/hosts file                           -->
     <!-- ==================================================================== -->
-    <target name="routlt-create-hosts-entry" unless="${hosts-entry-exists}" description="Creates a new entry in the /etc/hosts file.">
+    <target name="routlt-create-hosts-entry" depends="routlt-check-host-entry-exists" if="create-hosts-entry" description="Creates a new entry in the /etc/hosts file.">
         <echo>Now append ${virtual-host.name} ${hosts.file} entry</echo>
         <echo file="${hosts.file}" append="true"><![CDATA[
 127.0.0.1 ${virtual-host.name}
