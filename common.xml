@@ -18,20 +18,33 @@
         <input addproperty="vendor.name" message="Vendor Name"/>
         <input addproperty="package.name" message="Package Name"/>
         <!-- prepare action and Rout.Lt action namespace -->
-        <property name="action.namespace" value="\${vendor.name}\${package.name}\Actions"/>
+        <property name="package.namespace" value="\${vendor.name}\${package.name}"/>
+        <property name="action.namespace" value="\${package.namespace}\Actions"/>
         <property name="routlt.action.namespace" value="/${vendor.name}/${package.name}/Actions"/>
-        <!-- copy the framework files -->
+        <!-- copy the static framework files -->
         <copy todir="${installation.dir}">
-            <fileset dir="${routlt-project.basedir}/templates">
+            <fileset dir="${routlt-project.basedir}/templates/static">
                 <include name="**/*"/>
             </fileset>
             <filterchain>
                 <expandproperties/>
             </filterchain>
         </copy>
+        <!-- copy the dynamic framework files -->
+        <copy todir="${installation.dir}/WEB-INF/classes/${package.namespace}">
+            <fileset dir="${routlt-project.basedir}/templates/dynamic/WEB-INF">
+                <include name="**/*"/>
+            </fileset>
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <!-- install composer dependencies -->
         <exec dir="${installation.dir}" executable="composer">
             <arg line="--no-interaction install"/>
         </exec>
+        <!-- create the default catch-all index.do file -->
+        <touch file="${installation.dir}/index.do"/>
     </target>
 
 </project>
