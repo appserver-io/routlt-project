@@ -12,9 +12,9 @@
     <property file="${routlt-project.basedir}/common.default.properties"/>
 
     <!-- ==================================================================== -->
-    <!-- Creates a new Rout.Lt project                                        -->
+    <!-- Creates a  Rout.Lt 2 project for appserver.io                        -->
     <!-- ==================================================================== -->
-    <target name="routlt-create-project" description="Creates a new Rout.Lt project.">
+    <target name="routlt-create-project" description="Creates a Rout.Lt 2 project for appserver.io.">
         <!-- query the user for necessary project data -->
         <input addproperty="application.name" message="Application Name"/>
         <input addproperty="installation.dir" defaultvalue="${appserver.webapps.dir}/${application.name}" message="Installation Directory"/>
