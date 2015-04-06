@@ -1,7 +1,6 @@
 {
 	"name" : "appserver-io/routlt-project",
 	"description" : "Stub to create a new appserver.io Rout.Lt project",
-	"version" : "0.1.0",
 	"authors" : [{
 			"name" : "Tim Wagner",
 			"email" : "tw@appserver.io"
