@@ -13,7 +13,7 @@
  *
  * @author  Tim Wagner <tw@appserver.io>
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link    https://github.com/appserver-io/routlt-project
+ * @link    https://github.com/${composer.name}
  */
 
 namespace ${action.namespace};
@@ -29,7 +29,7 @@ use ${util.namespace}\RequestKeys;
  *
  * @author  Tim Wagner <tw@appserver.io>
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link    https://github.com/appserver-io/routlt-project
+ * @link    https://github.com/${composer.name}
  *
  * @Path(name="/index")
  *

@@ -13,7 +13,7 @@
  *
  * @author  Tim Wagner <tw@appserver.io>
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link    https://github.com/appserver-io/routlt-project
+ * @link    https://github.com/${composer.name}
  */
 
 namespace ${util.namespace};
@@ -23,7 +23,7 @@ namespace ${util.namespace};
  *
  * @author  Tim Wagner <tw@appserver.io>
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link    https://github.com/appserver-io/routlt-project
+ * @link    https://github.com/${composer.name}
  */
 class RequestKeys
 {
@@ -37,6 +37,8 @@ class RequestKeys
 
     /**
      * Make clone method private to avoid initialization by cloning.
+     *
+     * @return ${util.namespace}\RequestKeys
      */
     private function __clone()
     {

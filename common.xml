@@ -10,35 +10,123 @@
 
     <!-- initialize file based properties -->
     <property file="${routlt-project.basedir}/common.default.properties"/>
+    
+    <!-- ==================================================================== -->
+    <!-- Defines a Script to uppercase a string                               -->
+    <!-- ==================================================================== -->
+    <scriptdef language="javascript" name="upper">
+        <attribute name="string" /> 
+        <attribute name="to" />
+        <![CDATA[
+            project.setProperty(attributes.get("to" ), attributes.get("string").toUpperCase());
+        ]]>
+    </scriptdef>
+
+    <!-- ==================================================================== -->
+    <!-- Defines a Script to lowercase a string                               -->
+    <!-- ==================================================================== -->
+    <scriptdef language="javascript" name="lower">
+        <attribute name="string" /> 
+        <attribute name="to" />
+        <![CDATA[
+            project.setProperty(attributes.get("to"), attributes.get("string").toLowerCase());
+        ]]>
+    </scriptdef>
+
+    <!-- ==================================================================== -->
+    <!-- Defines a Script to uppercase the first character of a  string       -->
+    <!-- ==================================================================== -->
+    <scriptdef language="javascript" name="ucfirst">
+        <attribute name="string" /> 
+        <attribute name="to" />
+        <![CDATA[
+            var the_string = attributes.get("string");
+            project.setProperty(attributes.get("to"), the_string.substr(0,1).toUpperCase() + the_string.substr(1));
+        ]]>
+    </scriptdef>
+
+    <!-- ==================================================================== -->
+    <!-- Defines a Script to capitalize a strings words (split by a seprator) -->
+    <!-- ==================================================================== -->
+    <scriptdef language="javascript" name="capitalize">
+        <attribute name="string" />
+        <attribute name="to" />
+        <attribute name="separator"/>
+        <![CDATA[
+
+            // load the input data
+            var string = new String(attributes.get("string"));
+            var separator = new String(attributes.get("separator"));
+
+            // split the string into an array
+            var strArr = new String(string).split(separator);
+            var newArr = [];
+    
+            // upper case each word
+            for (var i = 0 ; i < strArr.length ; i++ ) {
+                var FirstLetter = strArr[i].charAt(0).toUpperCase();
+                var restOfWord = strArr[i].slice(1);
+                newArr[i] = FirstLetter + restOfWord;
+            }
+
+            // set the output property with the capitalized string
+            project.setProperty(attributes.get("to"), newArr.join(''));
+
+        ]]>
+    </scriptdef>
 
     <!-- ==================================================================== -->
     <!-- Creates a  Rout.Lt 2 project for appserver.io                        -->
     <!-- ==================================================================== -->
     <target name="routlt-create-project" description="Creates a Rout.Lt 2 project for appserver.io.">
         <!-- query the user for necessary project data -->
-        <input addproperty="application.name" message="Application Name"/>
+        <input addproperty="vendor.name" defaultvalue="${stub.default.vendor.name}" message="Vendor Name"/>
+        <input addproperty="application.name" defaultvalue="${stub.default.application.name}" message="Application Name"/>
         <input addproperty="installation.dir" defaultvalue="${appserver.webapps.dir}/${application.name}" message="Installation Directory"/>
-        <input addproperty="vendor.name" message="Vendor Name"/>
-        <input addproperty="package.name" message="Package Name"/>
-        <input addproperty="virtual-host.create" defaultvalue="true" validargs="true,false" message="Create a Virtual-Host also"/>
+        <input addproperty="composer.name" defaultvalue="${vendor.name}/${application.name}" message="Composer Name"/>
+        <input addproperty="virtual-host.create" defaultvalue="false" validargs="true,false" message="Create a Virtual-Host also"/>
+        <!-- capitalize application/vendor name for furhter usage -->
+        <capitalize string="${vendor.name}" to="vendor.name.capitalized" separator="-" />
+        <capitalize string="${application.name}" to="application.name.capitalized" separator="-" />
         <!-- prepare Rout.Lt 2 configuration specific namespaces -->
-        <property name="package.namespace" value="${vendor.name}\${package.name}"/>
-        <property name="routlt.action.namespace" value="/${vendor.name}/${package.name}/Actions"/>
+        <property name="composer.namespace" value="${vendor.name.capitalized}\\${application.name.capitalized}"/>
+        <property name="application.namespace" value="${vendor.name.capitalized}\${application.name.capitalized}"/>
+        <property name="routlt.action.namespace" value="/${vendor.name.capitalized}/${application.name.capitalized}/Actions"/>
         <!-- prepare Rout.Lt 2 application specific namespaces -->
-        <property name="util.namespace" value="${package.namespace}\Util"/>
-        <property name="action.namespace" value="${package.namespace}\Actions"/>
+        <property name="util.namespace" value="${application.namespace}\Util"/>
+        <property name="action.namespace" value="${application.namespace}\Actions"/>
         <!-- copy the static framework files -->
         <copy todir="${installation.dir}">
             <fileset dir="${routlt-project.basedir}/templates/static">
+                <include name="**/*"/>
+                <exclude name="build.xml"/>
+            </fileset>
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <!-- copy the build.xml file, but ONLY replace the project name -->
+        <copy file="${routlt-project.basedir}/templates/static/build.xml" todir="${installation.dir}">
+            <filterchain>
+                <expandproperties>
+                    <propertyset>
+                        <propertyref name="composer.name" />
+                    </propertyset>
+                </expandproperties>
+            </filterchain>
+        </copy>
+        <!-- copy the dynamic framework class iles -->
+        <copy todir="${installation.dir}/WEB-INF/classes/${application.namespace}">
+            <fileset dir="${routlt-project.basedir}/templates/dynamic/WEB-INF/classes">
                 <include name="**/*"/>
             </fileset>
             <filterchain>
                 <expandproperties/>
             </filterchain>
         </copy>
-        <!-- copy the dynamic framework files -->
-        <copy todir="${installation.dir}/WEB-INF/classes/${package.namespace}">
-            <fileset dir="${routlt-project.basedir}/templates/dynamic/WEB-INF">
+        <!-- copy the dynamic framework test files -->
+        <copy todir="${installation.dir}/WEB-INF/tests/${application.namespace}">
+            <fileset dir="${routlt-project.basedir}/templates/dynamic/WEB-INF/tests">
                 <include name="**/*"/>
             </fileset>
             <filterchain>
@@ -46,8 +134,8 @@
             </filterchain>
         </copy>
         <!-- install composer dependencies -->
-        <exec dir="${installation.dir}" executable="composer">
-            <arg line="--no-interaction install"/>
+        <exec dir="${installation.dir}" executable="ant">
+            <arg line="composer-install"/>
         </exec>
         <!-- create the default catch-all index.do file -->
         <touch file="${installation.dir}/index.do"/>

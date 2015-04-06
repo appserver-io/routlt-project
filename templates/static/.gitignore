@@ -1,0 +1,11 @@
+/.idea
+/.settings
+/.buildpath
+/.project
+/.DS_Store
+/vendor
+/target
+/build.properties
+/composer.lock
+/composer.phar
+/*.iml
