@@ -9,10 +9,10 @@
 		"components/font-awesome" : "~4.0",
 		"appserver-io/routlt" : "${routlt.version}"
 	},
-    "require-dev" : {
-        "appserver-io/phar" : "~1.0",
-        "appserver-io/build" : "~1.0"
-    },
+	"require-dev" : {
+		"appserver-io/phar" : "~1.0",
+		"appserver-io/build" : "~1.0"
+	},
 	"autoload" : {
 		"psr-0" : {
 			"${composer.namespace}" : [
