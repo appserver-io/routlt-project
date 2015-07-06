@@ -34,7 +34,7 @@ use ${util.namespace}\RequestKeys;
  * @Path(name="/index")
  *
  * @Results({
- *     @Result(name="input", result="/dhtml/index.dhtml", type="AppserverIo\Routlt\Results\ServletDispatcherResult")
+ *     @Result(name="input", result="/index.dhtml", type="AppserverIo\Routlt\Results\ServletDispatcherResult")
  * })
  */
 class IndexAction extends DispatchAction
