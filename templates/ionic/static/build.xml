@@ -65,4 +65,31 @@
         <antcall target="composer-update"/>
     </target>
 
+    <!-- ===================================================================== -->
+    <!-- The post-install target invoked by the Rout.Lt project stub generator -->
+    <!-- ===================================================================== -->
+    <target name="post-install">
+        <antcall target="composer-install"/>
+        <antcall target="run-generator"/>
+    </target>
+
+    <!-- ===================================================================== -->
+    <!-- Invokes the Yeoman Ionic generator use to create the JS stub          -->
+    <!-- ===================================================================== -->
+    <target name="run-generator">
+        <!-- create a temporary directory, because Cordova needs an empty one -->
+        <tempfile property="temp.dir" destDir="${java.io.tmpdir}" prefix="build"/>
+        <mkdir dir="${temp.dir}"/>
+        <!-- invoke the Yeoman Generator in the tempory directory -->
+        <exec dir="${temp.dir}" executable="yo">
+            <arg line="${generator.name} ${generator.args}"/>
+        </exec>
+        <!-- copy the generated stuff to our base directory -->
+        <move todir="${basedir}">
+            <fileset dir="${temp.dir}" includes="**/*"/>
+        </move>
+        <!-- cleanup the temporary directory -->
+        <delete dir="${temp.dir}"/>
+    </target>
+
 </project>

@@ -1,0 +1,25 @@
+<phpunit>
+    <testsuites>
+	    <testsuite name="${composer.name} PHPUnit testsuite">
+	        <directory suffix="Test.php">WEB-INF/tests</directory>
+            <directory suffix="Test.php">META-INF/tests</directory>
+            <directory suffix="Test.php">common-INF/tests</directory>
+	    </testsuite>
+	</testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">WEB-INF/classes</directory>
+            <directory suffix=".php">META-INF/classes</directory>
+            <directory suffix=".php">common/classes</directory>
+        </whitelist>
+    </filter>
+    <!-- Code coverage report, optional -->
+    <logging>
+        <log type="coverage-html" target="target/reports/unit/coverage"/>
+        <log type="coverage-clover" target="target/reports/unit/clover.xml"/>
+        <log type="junit" target="target/reports/unit/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+    <php>
+        <ini name="date.timezone" value="Europe/Berlin"/>
+    </php>
+</phpunit>

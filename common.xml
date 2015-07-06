@@ -80,11 +80,11 @@
     <!-- ==================================================================== -->
     <target name="routlt-create-project" description="Creates a Rout.Lt 2 project for appserver.io.">
         <!-- query the user for necessary project data -->
+        <input addproperty="project.type" defaultvalue="default" validargs="default,ionic" message="Project Type"/>
         <input addproperty="vendor.name" defaultvalue="${stub.default.vendor.name}" message="Vendor Name"/>
         <input addproperty="application.name" defaultvalue="${stub.default.application.name}" message="Application Name"/>
         <input addproperty="installation.dir" defaultvalue="${appserver.webapps.dir}/${application.name}" message="Installation Directory"/>
         <input addproperty="composer.name" defaultvalue="${vendor.name}/${application.name}" message="Composer Name"/>
-        <input addproperty="virtual-host.create" defaultvalue="false" validargs="true,false" message="Create a Virtual-Host also"/>
         <!-- capitalize application/vendor name for furhter usage -->
         <capitalize string="${vendor.name}" to="vendor.name.capitalized" separator="-" />
         <capitalize string="${application.name}" to="application.name.capitalized" separator="-" />
@@ -97,7 +97,7 @@
         <property name="action.namespace" value="${application.namespace}\Actions"/>
         <!-- copy the static framework files -->
         <copy todir="${installation.dir}">
-            <fileset dir="${routlt-project.basedir}/templates/static">
+            <fileset dir="${routlt-project.basedir}/templates/${project.type}/static">
                 <include name="**/*"/>
                 <exclude name="build.xml"/>
             </fileset>
@@ -106,7 +106,7 @@
             </filterchain>
         </copy>
         <!-- copy the build.xml file, but ONLY replace the project name -->
-        <copy file="${routlt-project.basedir}/templates/static/build.xml" todir="${installation.dir}">
+        <copy file="${routlt-project.basedir}/templates/${project.type}/static/build.xml" todir="${installation.dir}">
             <filterchain>
                 <expandproperties>
                     <propertyset>
@@ -117,7 +117,7 @@
         </copy>
         <!-- copy the dynamic framework class iles -->
         <copy todir="${installation.dir}/WEB-INF/classes/${application.namespace}">
-            <fileset dir="${routlt-project.basedir}/templates/dynamic/WEB-INF/classes">
+            <fileset dir="${routlt-project.basedir}/templates/${project.type}/dynamic/WEB-INF/classes">
                 <include name="**/*"/>
             </fileset>
             <filterchain>
@@ -126,7 +126,7 @@
         </copy>
         <!-- copy the dynamic framework test files -->
         <copy todir="${installation.dir}/WEB-INF/tests/${application.namespace}">
-            <fileset dir="${routlt-project.basedir}/templates/dynamic/WEB-INF/tests">
+            <fileset dir="${routlt-project.basedir}/templates/${project.type}/dynamic/WEB-INF/tests">
                 <include name="**/*"/>
             </fileset>
             <filterchain>
@@ -135,12 +135,8 @@
         </copy>
         <!-- install composer dependencies -->
         <exec dir="${installation.dir}" executable="ant">
-            <arg line="composer-install"/>
+            <arg line="post-install"/>
         </exec>
-        <!-- create the default catch-all index.do file -->
-        <touch file="${installation.dir}/index.do"/>
-        <!-- create a virtual-host if requested -->
-        <antcall target="routlt-create-virtual-host-wrapper"/>
     </target>
 
     <!-- ==================================================================== -->
