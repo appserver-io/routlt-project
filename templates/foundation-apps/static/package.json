@@ -1,5 +1,5 @@
 {
-  "name": "${composer.name}",
+  "name": "${application.name}",
   "version": "0.1.0",
   "author": "TechDivision GmbH <core@techdivision.com>",
   "description": "",

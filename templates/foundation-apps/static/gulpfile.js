@@ -1,6 +1,6 @@
 'use strict';
 
-var appName = '${composer.name}';
+var appName = '${application.name}';
 
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();

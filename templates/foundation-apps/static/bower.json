@@ -1,5 +1,5 @@
 {
-  "name": "AngularApp",
+  "name": "${application.name}",
   "author": "TechDivision GmbH <core@techdivision.com>",
   "private": "true",
   "devDependencies": {},

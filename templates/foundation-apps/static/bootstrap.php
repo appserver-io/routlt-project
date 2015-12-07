@@ -13,7 +13,7 @@
  *
  * @author  Tim Wagner <tw@appserver.io>
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link    https://github.com/${composer.name}
+ * @link    https://github.com/${application.name}
  */
 
 require 'vendor/autoload.php';

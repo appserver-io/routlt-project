@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc controller
- * @name ${composer.name}.controller:404Controller
+ * @name ${application.name}.controller:404Controller
  * @description
  * # 404Controller
  *
  * @author Florian Hartl <f.hartl@techdivision.com>
  */
-angular.module('${composer.name}')
+angular.module('${application.name}')
     .controller('404Controller', function () {
 
     });

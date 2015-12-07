@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc overview
- * @name ${composer.name}
+ * @name ${application.name}
  * @description
  * # Initializes main application and routing
  *
@@ -10,7 +10,7 @@
  *
  * @author Florian Hartl <f.hartl@techdivision.com>
  */
-angular.module('${composer.name}',
+angular.module('${application.name}',
         [
             'ui.router',
             'foundation',
