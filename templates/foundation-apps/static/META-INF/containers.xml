@@ -6,9 +6,16 @@
                 <virtualHosts>
                     <virtualHost name="${application.name}.dev www.${application.name}.dev">
                         <params>
-                            <param name="admin" type="string">info@appserver.io</param>
                             <param name="documentRoot" type="string">webapps/${application.name}</param>
                         </params>
+                        <rewrites>
+                            <rewrite condition="-f{OR}.*\.do.*" target="" flag="L" />
+                            <rewrite condition="^/app/(.+)${AND}\..{1,5}{AND}!\?{OR}\..{1,5}\?" target="/.tmp/$1" flag="L" />
+                            <rewrite
+                                    condition="^/app"
+                                    target="/.tmp/index.html"
+                                    flag="L" />
+                        </rewrites>
                     </virtualHost>
                 </virtualHosts>
             </server>
@@ -16,9 +23,16 @@
                 <virtualHosts>
                     <virtualHost name="${application.name} www.${application.name}.dev">
                         <params>
-                            <param name="admin" type="string">info@appserver.io</param>
                             <param name="documentRoot" type="string">webapps/${application.name}</param>
                         </params>
+                        <rewrites>
+                            <rewrite condition="-f{OR}.*\.do.*" target="" flag="L" />
+                            <rewrite condition="^/app/(.+)${AND}\..{1,5}{AND}!\?{OR}\..{1,5}\?" target="/.tmp/$1" flag="L" />
+                            <rewrite
+                                    condition="^/app"
+                                    target="/.tmp/index.html"
+                                    flag="L" />
+                        </rewrites>
                     </virtualHost>
                 </virtualHosts>
             </server>

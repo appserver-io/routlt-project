@@ -1,0 +1,29 @@
+/**
+ * styles to compile.
+ *
+ * @author Florian Hartl <f.hartl@techdivision.com>
+ */
+
+// 1. override with own variables and breakpoints
+@import "variables";
+
+// 2. load foundation apps framework with settings
+@import "foundation";
+
+// 3. load fonts
+@import "fonts";
+
+// 4. import global mixins
+@import "mixins";
+
+// 5. import keyframes
+@import "keyframes/import";
+
+// 6. import layout
+@import "layout/import";
+
+// 7. import components
+@import "components/import";
+
+// 8. import views
+@import "views/import";

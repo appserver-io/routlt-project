@@ -115,6 +115,7 @@
     <!-- ===================================================================== -->
     <target name="gulp-build">
         <exec dir="${basedir}" executable="gulp">
+            <arg line="-build"/>
         </exec>
     </target>
 

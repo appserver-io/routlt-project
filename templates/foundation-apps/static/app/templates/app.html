@@ -1,12 +1,7 @@
-<div class="grid-frame ${application.name}-site">
-    <div class="grid-block vertical">
-        <div class="grid-block">
-            <ul class="dark menu-bar">
-                <li><a ui-sref="app.imNotPresent">Broken</a></li>
-                <li><a ui-sref="app.home">Home</a></li>
-                <li><a ui-sref="app.about">About</a></li>
-            </ul>
-        </div>
-        <ui-view name="contentView" class="grid-block vertical"></ui-view>
+<div class="grid-frame vertical ${application.name}-site">
+    <div class="primary title-bar">
+        <div class="center title"><a ui-sref="home">zMail</a></div>
+        <span class="right"><a ui-sref="settings">Settings</a></span>
     </div>
+    <div ui-view class="grid-block"></div>
 </div>
