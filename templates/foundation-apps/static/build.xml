@@ -87,7 +87,7 @@
     <!-- ==================================================================== -->
     <!-- Updates bower dependencies defined in bower.json               -->
     <!-- ==================================================================== -->
-    <target name="bower-update" depends="is-bower-installed" if="bower.present" description="Updates bower dependencies defined in bower.json">
+    <target name="bower-update" description="Updates bower dependencies defined in bower.json">
         <exec dir="${basedir}" executable="bower">
             <arg line="update"/>
         </exec>
@@ -102,11 +102,30 @@
     </target>
 
     <!-- ===================================================================== -->
+    <!-- Installs all dependencies defined in package.json  -->
+    <!-- ===================================================================== -->
+    <target name="node-install">
+        <exec dir="${basedir}" executable="npm">
+            <arg line="install"/>
+        </exec>
+    </target>
+
+    <!-- ===================================================================== -->
+    <!-- Installs all dependencies defined in package.json  -->
+    <!-- ===================================================================== -->
+    <target name="gulp-build">
+        <exec dir="${basedir}" executable="gulp">
+        </exec>
+    </target>
+
+    <!-- ===================================================================== -->
     <!-- The post-install target invoked by the Rout.Lt project stub generator -->
     <!-- ===================================================================== -->
     <target name="post-install">
         <antcall target="composer-install"/>
         <antcall target="bower-install"/>
+        <antcall target="node-install"/>
+        <antcall target="gulp-build"/>
     </target>
 
 </project>
