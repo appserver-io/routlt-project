@@ -115,7 +115,7 @@
     <!-- ===================================================================== -->
     <target name="gulp-deploy">
         <exec dir="${basedir}" executable="gulp">
-            <arg line="-deploy"/>
+            <arg line="-d"/>
         </exec>
     </target>
 
