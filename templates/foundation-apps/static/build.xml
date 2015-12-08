@@ -111,11 +111,11 @@
     </target>
 
     <!-- ===================================================================== -->
-    <!-- Installs all dependencies defined in package.json  -->
+    <!-- gulp once with deploy argument to prevent watching and serving  -->
     <!-- ===================================================================== -->
-    <target name="gulp-build">
+    <target name="gulp-deploy">
         <exec dir="${basedir}" executable="gulp">
-            <arg line="-build"/>
+            <arg line="-deploy"/>
         </exec>
     </target>
 
@@ -126,7 +126,7 @@
         <antcall target="composer-install"/>
         <antcall target="bower-install"/>
         <antcall target="node-install"/>
-        <antcall target="gulp-build"/>
+        <antcall target="gulp-deploy"/>
     </target>
 
 </project>
