@@ -47,7 +47,7 @@ angular.module('${application.name}',
                 controllerAs: 'appCtrl'
             })
             .state('app.home', {
-                url: '/home',
+                url: '/',
                 cache: false,
                 templateUrl: 'templates/views/home.html',
                 controller: 'HomeController',

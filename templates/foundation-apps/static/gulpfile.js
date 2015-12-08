@@ -34,15 +34,18 @@ gulp.src('bower_components/angular/angular.js')
 var args = require('yargs')
     .alias('e', 'emulate')
     .alias('b', 'build')
+    .alias('d', 'deploy')
     .alias('r', 'run')
     // remove all debug messages (console.logs, alerts etc) from release build
     .alias('release', 'strip-debug')
     .default('build', false)
+    .default('deploy', false)
     .default('port', 9555)
     .default('strip-debug', false)
     .argv;
 
 var build = !!(args.build || args.emulate || args.run);
+var deploy = !!(args.deploy);
 var emulate = args.emulate;
 var run = args.run;
 var port = args.port;
@@ -269,8 +272,8 @@ gulp.task('default', function(done) {
     [
        'index'
     ],
-    build ? 'noop' : 'watchers',
-    build ? 'noop' : 'serve',
+      (build || deploy) ? 'noop' : 'watchers',
+      (build || deploy) ? 'noop' : 'serve',
     done);
 });
 
