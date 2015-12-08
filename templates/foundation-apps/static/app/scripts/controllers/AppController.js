@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc controller
- * @name ${application.name}.controller:AboutController
+ * @name ${application.name}.controller:AppController
  * @description
- * # AboutController
+ * # AppController
  *
  * @author Florian Hartl <f.hartl@techdivision.com>
  */
 angular.module('${application.name}')
-    .controller('AboutController', function () {
+    .controller('AppController', function () {
 
     });

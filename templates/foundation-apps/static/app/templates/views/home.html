@@ -1,10 +1,13 @@
-<div zf-panel position="left" id="sub-nav" class="fast bounceInOut medium-3 medium-grid-content">
-    <a class="button expand" zf-open="compose">Compose</a>
+<div zf-panel position="left" id="sub-nav" class="fast bounceInOut medium-3 medium-grid-content" style="background-color: #f4f4f4; border-right: 1px solid #d0d0d0;">
     <section class="block-list with-icons">
         <ul>
             <li class="hide-for-medium">
                 <img src="http://placehold.it/1x1" alt="">
                 <a zf-close="sub-nav">Close</a>
+            </li>
+            <li zf-open="compose">
+                <img src="http://placehold.it/1x1" alt="">
+                <a href="#">Compose</a>
             </li>
             <li>
                 <img src="http://placehold.it/1x1" alt="">
@@ -23,12 +26,15 @@
     </section>
 </div>
 
-<div class="small-12 medium-3 messages grid-content">
+<div class="small-12 medium-3 messages grid-content" style="border-right: 1px solid #d0d0d0;">
     <a class="button secondary expand hide-for-medium" zf-open="sub-nav">This</a>
+    <label>
+        <span class="inline-label">
+            <input type="search" placeholder="Search a message">
+            <a href="#" class="button">Search</a>
+        </span>
+    </label>
     <section class="block-list">
-        <li>
-            <input type="text" placeholder="Search">
-        </li>
         <li>
             <a zf-toggle="message">
                 <h5>This is a message</h5>
@@ -92,11 +98,11 @@
             <span class="right"><a href="#">Send</a></span>
         </div>
         <div class="grid-content">
-            <label>Email
-                <input type="text" placeholder="email@zmail.com" />
+            <label>To:
+                <input type="text" placeholder="Recipient" />
             </label>
             <label>Message
-                <textarea placeholder="hello..."></textarea>
+                <textarea placeholder="Your Message"></textarea>
             </label>
         </div>
     </div>
