@@ -1,0 +1,28 @@
+/* Fix for default foundation zMail template */
+.app-view {
+    overflow: visible;
+}
+
+.app-menu {
+    background-color: #f4f4f4;
+    border-right: 1px solid #d0d0d0;
+}
+
+.app-menu-section {
+    @include breakpoint(medium down) {
+        margin: 0;
+    }
+}
+
+.app-messages {
+    border-right: 1px solid #d0d0d0;
+}
+
+.app-messages-menu {
+    position: absolute;
+    color: white;
+    top: -49px;
+    left: 0;
+    padding: 1rem;
+}
+/* ---------- */

@@ -20,7 +20,9 @@
   "smarttabs": true,
   "globals": {
     "angular": false,
-    "cordova": false,
-    "StatusBar": false
+    "StatusBar": false,
+    "Hammer": false,
+    "FastClick": false,
+    "_": false
   }
 }
