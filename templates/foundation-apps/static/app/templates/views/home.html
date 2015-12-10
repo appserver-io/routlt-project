@@ -1,0 +1,114 @@
+<div zf-panel position="left" id="sub-nav" class="fast bounceInOut medium-3 medium-grid-content app-menu">
+    <section class="block-list with-icons app-menu-section">
+        <ul>
+            <li class="hide-for-medium">
+                <img src="http://placehold.it/1x1" alt="">
+                <a zf-close="sub-nav">Close</a>
+            </li>
+            <li zf-open="compose">
+                <img src="http://placehold.it/1x1" alt="">
+                <a href="#">Compose</a>
+            </li>
+            <li>
+                <img src="http://placehold.it/1x1" alt="">
+                <a href="#">Inbox</a>
+            </li>
+            <!-- With an icon -->
+            <li>
+                <img src="http://placehold.it/1x1" alt="">
+                <a href="#">Sent Messages</a>
+            </li>
+            <li>
+                <img src="http://placehold.it/1x1" alt="">
+                <a href="#">Favorited</a>
+            </li>
+        </ul>
+    </section>
+</div>
+
+<div class="small-12 medium-3 app-messages grid-content" >
+    <span class="hide-for-medium app-messages-menu" zf-open="sub-nav">
+        Menu
+    </span>
+    <label>
+        <span class="inline-label">
+            <input type="search" placeholder="Search a message">
+            <a href="#" class="button">Search</a>
+        </span>
+    </label>
+    <section class="block-list">
+        <li>
+            <a zf-toggle="message">
+                <h5>This is a message</h5>
+                <p>It's a pretty long message, but thats chill, we totes like to read now a days.</p>
+            </a>
+        </li>
+        <li>
+            <a zf-toggle="message">
+                <h5>This is a message</h5>
+                <p>It's a pretty long message, but thats chill, we totes like to read now a days.</p>
+            </a>
+        </li>
+        <li>
+            <a zf-toggle="message">
+                <h5>This is a message</h5>
+                <p>It's a pretty long message, but thats chill, we totes like to read now a days.</p>
+            </a>
+        </li>
+        <li>
+            <a zf-toggle="message">
+                <h5>This is a message</h5>
+                <p>It's a pretty long message, but thats chill, we totes like to read now a days.</p>
+            </a>
+        </li>
+        <li>
+            <a zf-toggle="message">
+                <h5>This is a message</h5>
+                <p>It's a pretty long message, but thats chill, we totes like to read now a days.</p>
+            </a>
+        </li>
+        <li>
+            <a zf-toggle="message">
+                <h5>This is a message</h5>
+                <p>It's a pretty long message, but thats chill, we totes like to read now a days.</p>
+            </a>
+        </li>
+    </section>
+</div>
+
+<div zf-panel id="message" position="right" class="app-message fast bounceInOut small-12 medium-6 medium-grid-content">
+    <a class="hide-for-medium button tiny" zf-close="message">Back</a>
+    <h2>This is a message</h2>
+    <p>Mike Meyers - 6/12/2014</p>
+    <hr />
+    <p>Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu.
+    </p>
+    <p>Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu.
+    </p>
+    <p>Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu.
+    </p>
+    <p>Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu.
+    </p>
+</div>
+
+<!-- Start Compose Message -->
+<zf-modal overlay="true" id="compose">
+    <div class="grid-block vertical">
+        <div class="primary title-bar">
+            <div class="center title">Compose Message</div>
+            <span class="left"><a zf-close="compose" href="#">Cancel</a></span>
+            <span class="right"><a href="#">Send</a></span>
+        </div>
+        <hr />
+        <div class="grid-content">
+            <label>To:
+                <input type="text" placeholder="Recipient" />
+            </label>
+            <label>Message
+                <textarea placeholder="Your Message"></textarea>
+            </label>
+        </div>
+    </div>
+    </div>
+</zf-modal>
+<!-- End Compose Message -->

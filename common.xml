@@ -80,7 +80,7 @@
     <!-- ==================================================================== -->
     <target name="routlt-create-project" description="Creates a Rout.Lt 2 project for appserver.io.">
         <!-- query the user for necessary project data -->
-        <input addproperty="project.type" defaultvalue="default" validargs="default,ionic" message="Project Type"/>
+        <input addproperty="project.type" defaultvalue="default" validargs="default,ionic,foundation-apps" message="Project Type"/>
         <input addproperty="vendor.name" defaultvalue="${stub.default.vendor.name}" message="Vendor Name"/>
         <input addproperty="application.name" defaultvalue="${stub.default.application.name}" message="Application Name"/>
         <input addproperty="installation.dir" defaultvalue="${appserver.webapps.dir}/${application.name}" message="Installation Directory"/>

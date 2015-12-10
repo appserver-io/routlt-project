@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <!-- CONFIGURATION -->
+
+    <!-- Allow web app to be run in full-screen mode. -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Make the app title different than the page title. -->
+    <meta name="apple-mobile-web-app-title" content="Proffile">
+    <!-- Configure the status bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- Disable automatic phone number detection. -->
+    <meta name="format-detection" content="telephone=no">
+
+    <title>${application.name}</title>
+
+    <base href="/app/">
+
+    <!-- inject:app-styles:css --><!-- endinject -->
+
+</head>
+<body ng-app="${application.name}">
+<ui-view></ui-view>
+<!-- inject:vendor:js --><!-- endinject -->
+<!-- inject:app:js --><!-- endinject -->
+</body>
+</html>

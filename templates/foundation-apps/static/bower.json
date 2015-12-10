@@ -1,0 +1,22 @@
+{
+  "name": "${application.name}",
+  "author": "TechDivision GmbH <core@techdivision.com>",
+  "private": "true",
+  "devDependencies": {},
+  "dependencies": {
+    "foundation-apps": "1.1.*",
+    "angular": "1.4.*",
+    "angular-resource": "1.4.*",
+    "angular-animate": "1.4.*",
+    "angular-sanitize": "1.4.*",
+    "angular-touch": "1.*",
+    "angular-validation-match": "1.6.*",
+    "ui-router-extras": "0.1.*",
+    "lodash": "~3.10.1"
+  },
+  "resolutions": {
+    "angular": "1.4.*",
+    "angular-animate": "1.4.*",
+    "angular-sanitize": "1.4.*"
+  }
+}

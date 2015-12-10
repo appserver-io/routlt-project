@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://www.appserver.io/appserver">
+
+    <!--
+     | This section defines informations about your application.
+    -->
+
+    <display-name>appserver.io Rout.Lt framework project stub</display-name>
+    <description>Project Stub for a appserver.io Servlet Engine based application.</description>
+
+    <!--
+     | This section is all about session configuration and several
+     | parameters that influence session storage and lifetime.
+     -->
+
+    <session-config>
+        <session-name>routlt_project</session-name>
+        <session-file-prefix>routlt_session_</session-file-prefix>
+    </session-config>
+
+    <!--
+     | This section defines the servlets configured to handle all requests
+     | of your application. The configured servlets has to be mapped to the
+     | request URIs in the next section.
+    -->
+
+    <servlet>
+        <description>A servlet that handles DHTML files.</description>
+        <display-name>The DHTML servlet</display-name>
+        <servlet-name>dhtml</servlet-name>
+        <servlet-class>AppserverIo\Appserver\ServletEngine\Servlets\DhtmlServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <description>The Rout.Lt controller servlet implementation.</description>
+        <display-name>The Rout.Lt controller servlet</display-name>
+        <servlet-name>routlt</servlet-name>
+        <servlet-class>AppserverIo\Routlt\ControllerServlet</servlet-class>
+
+        <!--
+         | Namespace your actions are using.
+        -->
+
+        <init-param>
+            <param-name>action.namespace</param-name>
+            <param-value>${routlt.action.namespace}</param-value>
+        </init-param>
+
+        <!--
+         | Optional path to a configuration file to store login credentials
+         | or custom stuff in.
+        -->
+
+        <!--
+        <init-param>
+            <param-name>routlt.configuration.file</param-name>
+            <param-value>WEB-INF/routlt.properties</param-value>
+        </init-param>
+        -->
+    </servlet>
+
+    <!--
+     | These are the servlet mappings that maps a request by the script
+     | file name part of the URI to the apropriate servlet. The mapping
+     | uses the PHP fnmatch() method that allows several wildcards.
+    -->
+
+    <servlet-mapping>
+        <servlet-name>dhtml</servlet-name>
+        <url-pattern>*.dhtml</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>routlt</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>routlt</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
