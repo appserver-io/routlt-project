@@ -13,20 +13,7 @@ var stylish = require('jshint-stylish');
 var connectLr = require('connect-livereload');
 var streamqueue = require('streamqueue');
 var runSequence = require('run-sequence');
-
-/**
- * Fix:
- *
- * Due to WebKit issue #138038, assigning to a property on an object created with Object.create may result in the
- * error TypeError: Attempted to assign to readonly property.
- * This bug is known to affect iOS 8 users and is particularly likely to happen in recent versions of
- * Angular.js (at least version 1.4.2).
- *
- */
 var webkitAssign = require('webkit-assign/gulp');
-gulp.src('bower_components/angular/angular.js')
-    .pipe(webkitAssign())
-    .pipe(gulp.dest('bower_components/angular/webkitAssign'));
 
 /**
  * Parse arguments
@@ -74,6 +61,20 @@ var errorHandler = function(error) {
 // clean target dir
 gulp.task('clean', function(done) {
   del([targetDir], done);
+});
+
+/**
+ * Fix:
+ *
+ * Due to WebKit issue #138038, assigning to a property on an object created with Object.create may result in the
+ * error TypeError: Attempted to assign to readonly property.
+ * This bug is known to affect iOS 8 users and is particularly likely to happen in recent versions of
+ * Angular.js (at least version 1.4.2).
+ */
+gulp.task('webkit_assign_angular', function () {
+    return gulp.src('bower_components/angular/angular.js')
+        .pipe(webkitAssign())
+        .pipe(gulp.dest('bower_components/angular/webkitAssign'));
 });
 
 //precompile .scss
@@ -262,6 +263,7 @@ gulp.task('default', function(done) {
   runSequence(
     'clean',
     'tests',
+    'webkit_assign_angular',
     [
       'fonts',
       'templates',
