@@ -1,5 +1,5 @@
 {
-	"name" : "${application.name}",
+	"name" : "${composer.name}",
 	"description" : "Rout.Lt project stub",
 	"version" : "0.1.0",
 	"require" : {
@@ -17,7 +17,7 @@
 	},
 	"autoload" : {
 		"psr-0" : {
-            "${application.name}" : [
+            "${composer.namespace}" : [
 				"common/classes",
 				"common/tests/",
 				"WEB-INF/classes",
