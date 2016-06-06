@@ -6,7 +6,7 @@
                 <virtualHosts>
                     <virtualHost name="${application.name}.dev www.${application.name}.dev">
                         <params>
-                            <param name="admin" type="string">info@appserver.io</param>
+                            <param name="admin" type="string">${admin.email}</param>
                             <param name="documentRoot" type="string">webapps/${application.name}</param>
                         </params>
                     </virtualHost>
@@ -16,7 +16,7 @@
                 <virtualHosts>
                     <virtualHost name="${application.name} www.${application.name}.dev">
                         <params>
-                            <param name="admin" type="string">info@appserver.io</param>
+                            <param name="admin" type="string">${admin.email}</param>
                             <param name="documentRoot" type="string">webapps/${application.name}</param>
                         </params>
                     </virtualHost>
